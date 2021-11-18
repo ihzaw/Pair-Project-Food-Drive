@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Food.init({
-    id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
     category: DataTypes.STRING,
