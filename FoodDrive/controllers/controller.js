@@ -21,7 +21,11 @@ class UserController {
                     let passValid = bcrypt.compareSync(req.body.password, data.password)
                     if (passValid) {
                         console.log("masok")
-                        res.redirect("/admin/home")
+                        if(req.body.username ==- "admin") {
+                            res.redirect("/admin/home")
+                        } else {
+                            res.redirect(`/${req.body.username}/home`)
+                        }
                     }
                 } else {
                     const error = 'invalid username/password'

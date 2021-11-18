@@ -16,7 +16,7 @@ app.get('/login/:username')
 app.post('/login/:username')
 
 app.get('/admin/home', MainController)
-app.get('/:username/home', MainController)
+app.get('/:username/home', MainController.UserHomePage)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
