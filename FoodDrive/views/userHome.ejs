@@ -50,10 +50,10 @@
 
         <form action="/<%= data.username %>/home" method="GET">
           <select name="filter">
-            <option value="Snack">Snack</option>
-            <option value="Drink">Drink</option>
-            <option value="Main Dish">Main Dish</option>
-            <option value="Chicken">Chicken</option>
+            <%= JSON.stringify(dataFood) %>
+            <% dataFood.forEach(e=>{ %>
+            <option value="<%= e.id %>"><%= e.name %></option>
+            <% }) %>
           </select>
           <input type="submit" value="Filter">
         </form>
@@ -78,11 +78,14 @@
                 <th class="table">Buy Now</th>
               </tr>
               <% e.Food.forEach(food=>{ %>
-              <tr>
-                <td><%= food.name %></td>
-                <td><%= currency(food.price) %></td>
-                <td><button class="block" onclick="window.location.href='/<%= data.username %>/home/<%= food.id %>/checkout'">BUY</button></td>
-              </tr>
+
+                  <tr>
+                    <td><%= food.name %></td>
+                    <td><%= currency(food.price) %></td>
+                    <td><button class="block" onclick="window.location.href='/<%= data.username %>/home/<%= food.id %>/checkout'">BUY</button></td>
+                  </tr>
+
+              
               <% }) %>
               <br><br>
           </table>
