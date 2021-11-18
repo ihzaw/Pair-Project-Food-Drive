@@ -1,5 +1,5 @@
 const express = require('express')
-const Controller = require('./controllers/controller')
+const UserController = require('./controllers/controller')
 const app = express()
 const port = 4000
 
@@ -7,11 +7,11 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/public'))
 
-app.get('/')
-app.get('/login')
-app.post('/login')
-app.get('/register', Controller.getRegister)
-app.post('/register', Controller.postRegister)
+app.get('/', UserController.getHome)
+app.get('/login' , UserController.getLogin)
+app.post('/login' , UserController.postLogin)
+app.get('/register', UserController.getRegister)
+app.post('/register', UserController.postRegister)
 app.get('/login/:username')
 app.post('/login/:username')
 

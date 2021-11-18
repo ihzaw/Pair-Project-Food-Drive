@@ -21,21 +21,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
-		<h1>Register Form</h1>
+		<h1>FoodDrive</h1>
 		<div class="main-agileinfo">
+            <div class="colorlibcopy-agile">
+                <p>Penjelasan Aplikasi</p>
+            </div>
 			<div class="agileits-top">
-				<form action="/register" method="post">
-					<input class="text" type="text" name="username" placeholder="Username" required="">
-					<input class="text email" type="email" name="email" placeholder="Email" required="">
-					<input class="text" type="password" name="password" placeholder="Password" required="">
-					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
-					<div class="wthree-text">
 
-						<div class="clear"> </div>
-					</div>
-					<input type="submit" value="SIGNUP">
-				</form>
-				<p>Back to Login <a href="/login"> Login Now!</a></p>
+
+                <form method="get" action="/login">
+                    <input type="submit" value="LOG IN">
+                </form>
+                <form method="get" action="/register">
+                    <input type="submit" value="REGISTER">
+                </form>
 			</div>
 		</div>
 		<!-- copyright -->
