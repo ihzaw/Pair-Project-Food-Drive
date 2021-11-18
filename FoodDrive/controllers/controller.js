@@ -2,6 +2,10 @@ const { User } = require('../models')
 const bcrypt = require('bcryptjs')
 
 class UserController {
+    static getHome(req, res){
+        res.render('home')
+    }
+    
     static getLogin(req, res) {
         res.render('login')
     }

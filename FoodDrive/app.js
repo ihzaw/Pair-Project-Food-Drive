@@ -7,7 +7,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/public'))
 
-app.get('/')
+app.get('/', UserController.getHome)
 app.get('/login' , UserController.getLogin)
 app.post('/login' , UserController.postLogin)
 app.get('/register', UserController.getRegister)

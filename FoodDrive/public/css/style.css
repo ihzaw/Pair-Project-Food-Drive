@@ -220,6 +220,20 @@ input[type="submit"] {
   letter-spacing: 4px;
 }
 
+input[type="button"] {
+  font-size: .9em;
+  color: #fff;
+  background: #76b852;
+  outline: none;
+  border: 1px solid #76b852;
+  cursor: pointer;
+  padding: 0.9em;
+  -webkit-appearance: none;
+  width: 49%;
+  margin: 2em 0;
+  letter-spacing: 4px;
+}
+
 input[type="submit"]:hover {
   -webkit-transition: .5s all;
   -moz-transition: .5s all;
