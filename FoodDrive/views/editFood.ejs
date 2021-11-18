@@ -21,9 +21,11 @@
 
         <p>Store</p>
         <% data2.forEach(e=>{ %>
-        <input type="radio" name="StoreId" value="<%= e.id %>"><label><%= e.name %></label><br>
-        <% }) %>
-
+            <% if(e.id === data1.StoreId){ %>
+                <input type="radio" name="StoreId" value="<%= e.id %>" checked="checked"><label><%= e.name %></label><br>
+            <% } else { %>
+                <input type="radio" name="StoreId" value="<%= e.id %>"><label><%= e.name %></label><br>
+            <% }}) %>
         <input type="submit" value="Submit">
       </form> 
 
