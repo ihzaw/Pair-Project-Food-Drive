@@ -21,6 +21,9 @@ class UserController {
                     let passValid = bcrypt.compareSync(req.body.password, data.password)
                     if (passValid) {
                         console.log("masok")
+                    }else {
+                        const error = 'invalid username/password'
+                        return res.redirect(`/login?error=${error}`)
                     }
                 } else {
                     const error = 'invalid username/password'
