@@ -10,15 +10,15 @@ app.use(express.static(__dirname + '/public'))
 
 
 
-// app.use(session({
-//   secret: "keyboard cat",
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { 
-//     secure: false,
-//     sameSite: true 
-//   }
-// }))
+app.use(session({ // BCRYPT
+  secret: "keyboard cat",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    secure: false,
+    sameSite: true 
+  }
+}))
 
 
 
@@ -33,7 +33,6 @@ app.post('/login/:username')
 
 // app.use(function(req,res,next){
 //   console.log(req.session)
-//   console.log(('Time:', Date.now()))
 //   next()
 // })
 
@@ -45,14 +44,14 @@ app.post('/login/:username')
 //   next()
 // })
 
-// app.use(function(req,res,next){
-//   console.log(req.session)
-//   if(!req.session.userId){
-//     res.redirect('/login?error')
-//   } else {
-//     next()
-//   }
-// })
+app.use(function(req,res,next){ // BCRYPT
+  console.log(req.session)
+  if(!req.session.UserId){
+    res.redirect('/login?error')
+  } else {
+    next()
+  }
+})
 
 
 app.get('/admin/home', MainController.getAdminHomePage)
