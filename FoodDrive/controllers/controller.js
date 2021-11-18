@@ -12,6 +12,7 @@ class UserController {
     }
 
     static postLogin(req, res) {
+        console.log(req.body.username)
         User.findOne({
             where: {
                 username: req.body.username
@@ -38,6 +39,7 @@ class UserController {
             .catch(err => res.send(err))
     }
 
+    
 
     static getRegister(req, res) {
         res.render('register')
