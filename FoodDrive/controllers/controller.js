@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs')
+const currency = require('../helper/convertToCurrency')
 const { Food, Store, UserDetail, User } = require('../models')
 
 class UserController {
@@ -25,6 +26,8 @@ class UserController {
   
                         req.session.UserId = data.id // BCRYPT
 
+                        if(data.role === 'Admin') return res.redirect(`/admin/home`)
+
                         return res.redirect(`/${data.username}/home`)
                     }
                     else {
@@ -39,13 +42,12 @@ class UserController {
             .catch(err => res.send(err))
     }
 
-    
-
     static getRegister(req, res) {
         res.render('register')
     }
 
     static postRegister(req, res) {
+        
         if (req.body.password[0] === req.body.password[1]) {
             User.create({
                 username: req.body.username,
@@ -53,7 +55,18 @@ class UserController {
                 password: req.body.password[0],
                 role: 'User'
             })
-                .then(data => { res.render('login') })
+                .then(data => { 
+                    UserDetail.create({
+                        firstName: "",
+                        lastName: "",
+                        balance: 0,
+                        UserId: data.id,
+                        gender: "",
+                        address: "",
+                      })
+                        .then(data => res.redirect('/login') )
+                        .catch(err => res.send(err.errors[0].message))
+                })
                 .catch(err => res.send(err.errors[0].message))
         } else {
             res.send("password tidak sama")
@@ -92,7 +105,6 @@ class MainController {
             .then(data => { res.redirect('/admin/home') })
             .catch(err => { res.send(err) })
     }
-
 
     static getEditFood(req, res) {
         Food.findByPk(req.params.foodId)
@@ -158,25 +170,44 @@ class MainController {
     }
 
     static getUserHome(req, res){
-        console.log(req.params.username)
-        User.findOne({
-            include: UserDetail,
-            where: {username : req.params.username}
-        })
-        .then(data => {
-            Store.findAll({
-                include: Food
+
+        const filter = req.query.filter
+        console.log(filter)
+
+        if(!filter){
+            User.findOne({
+                include: UserDetail,
+                where: {username : req.params.username}
             })
-                .then(dataFood => {
-                    res.render('userHome', { data, dataFood })
+            .then(data => {
+                Store.findAll({
+                    include: Food
                 })
-                .catch(err => res.send(err))
-        })
-        .catch(err => res.send(err))
+                    .then(dataFood => {
+                        return res.render('userHome', { data, dataFood , currency })
+                    })
+                    .catch(err => res.send(err))
+            })
+            .catch(err => res.send(err))
+        } else {
+            User.findOne({
+                include: UserDetail,
+                where: {username : req.params.username}
+            })
+            .then(data => {
+                Store.findAll({
+                    include: Food
+                })
+                    .then(dataFood => {
+                        return res.render('userHome', { data, dataFood , currency })
+                    })
+                    .catch(err => res.send(err))
+            })
+            .catch(err => res.send(err))
+        }
     }
 
     static postUserHome(req, res){
-        console.log(req.body.addBalance)
         User.findOne({
             include: UserDetail,
             where: {username : req.params.username}
@@ -190,12 +221,14 @@ class MainController {
                     UserId: data.id
                 }
             })
-                .then(data => { res.redirect(`/${req.params.username}/home`) })
-                .catch(err => { res.send(err) })
+            .then(data => { 
+                res.redirect(`/${req.params.username}/home`) 
+            })
+            .catch(err => { res.send(err) })
         })
         .catch(err => res.send(err))
     }
-
+    
     static getUserDetail(req, res){
         User.findOne({
             include: UserDetail,
@@ -204,20 +237,13 @@ class MainController {
         .then(data => res.render('userDetail', { data }))
         .catch(err => res.send(err))
     }
-
+    
     static postUserDetail(req, res){
-        console.log(req.body)
-
-
         User.findOne({
             include: UserDetail,
             where: {username : req.params.username}
         })
         .then(data => {
-            
-
-
-
             UserDetail.update({
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
