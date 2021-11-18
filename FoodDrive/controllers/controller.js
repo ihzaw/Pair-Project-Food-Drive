@@ -12,7 +12,7 @@ class UserController {
 
     static postLogin(req, res) {
         console.log(req.body.username)
-        User.findOne({
+        User.findOne( {
             where: {
                 username: req.body.username
             }
@@ -21,14 +21,17 @@ class UserController {
                 if (data !== null) {
                     let passValid = bcrypt.compareSync(req.body.password, data.password)
                     if (passValid) {
-
+                        
 
                         
                         req.session.UserId = data.id
 
 
-
-                        return res.redirect(`/${data.username}/home`)
+                        if(data.UserDetail === null) {
+                            res.redirect(`/${req.body.username}/home/userdetail`)
+                        } else {
+                            res.redirect(`/${data.username}/home`)
+                        }
                     }
                     else {
                         const error = 'invalid username/password'
