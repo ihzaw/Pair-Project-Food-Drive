@@ -2,10 +2,25 @@ const express = require('express')
 const {UserController, MainController}  = require('./controllers/controller')
 const app = express()
 const port = 3000
+const session = require('express-session')
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/public'))
+
+
+
+// app.use(session({
+//   secret: "keyboard cat",
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { 
+//     secure: false,
+//     sameSite: true 
+//   }
+// }))
+
+
 
 app.get('/', UserController.getHome)
 app.get('/login' , UserController.getLogin)
@@ -14,6 +29,30 @@ app.get('/register', UserController.getRegister)
 app.post('/register', UserController.postRegister)
 app.get('/login/:username')
 app.post('/login/:username')
+
+
+// app.use(function(req,res,next){
+//   console.log(req.session)
+//   console.log(('Time:', Date.now()))
+//   next()
+// })
+
+
+
+
+// const test = app.use(function(req, res, next){
+//   console.log("MAOSKOKSOKSOK")
+//   next()
+// })
+
+// app.use(function(req,res,next){
+//   console.log(req.session)
+//   if(!req.session.userId){
+//     res.redirect('/login?error')
+//   } else {
+//     next()
+//   }
+// })
 
 
 app.get('/admin/home', MainController.getAdminHomePage)
@@ -29,10 +68,10 @@ app.post('/admin/home/add/restaurant', MainController.postAddRestaurant)
 app.get('/admin/home/add/food', MainController.getAddFood)
 app.post('/admin/home/add/food', MainController.postAddFood)
 
-app.get('/:username/home') // GLENN
-app.post('/:username/home') // update topup // GLENN
-app.get('/:username/home/userdetail')
-app.post('/:username/home/userdetail')
+app.get('/:username/home', MainController.getUserHome) // GLENN
+app.post('/:username/home', MainController.postUserHome) // update topup // GLENN
+app.get('/:username/home/userdetail', MainController.getUserDetail)
+app.post('/:username/home/userdetail', MainController.postUserDetail)
 app.get('/:username/home/checkout') // IHZA
 app.post('/:username/home/checkout') //update balance // IHZA
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="window.location.href='/<%= data.username %>/home/userdetail'">Username Detail</button>
+    <%= JSON.stringify(dataFood) %>
+    <p>Welcome <%= data.UserDetail.firstName %></p>
+    <p>Balance : <%= data.UserDetail.balance %></p>
+    <form action="/<%= data.username %>/home" method="POST">
+        <label for="fname">Top-Up</label><br>
+        <input type="text" name="addBalance"><br>
+        <input type="submit" value="Submit">
+      </form> 
+
+      <% dataFood.forEach(e=>{ %>
+        <table border="1">
+            <tr>
+                <th colspan="3"><%= e.id %>. <%= e.name %> - <%= e.address %></th>
+              <tr>
+                <th>Food Name</th>
+                <th>Price</th>
+                <th>Buy Now</th>
+              </tr>
+              <% e.Food.forEach(food=>{ %>
+              <tr>
+                <td><%= food.name %></td>
+                <td><%= food.price %></td>
+                <td><a href="/<%= data.username %>/home/<%= e.id %>/checkout">BUY</a></td>
+              </tr>
+              <% }) %>
+              <br><br>
+          </table>
+          <% }) %>
+
+
+
+
+
+
+</body>
+</html>
