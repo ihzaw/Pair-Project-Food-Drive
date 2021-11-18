@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="text-align: center;">
+    <% let userData = tempArr[0] %>
+    <% let userDetail = userData.UserDetail %>
+    <% let itemData = tempArr[1] %>
+    <h1>Checkout Page</h1><br><br><br><br>
+    <h2>Are you sure you wanna buy this <%= itemData.name %>, <%= userDetail.firstName %> ?</h2><br><br>
+    <h2>Price is <div style="font-style: italic;"><%= currency(itemData.price) %></div>, You have <div style="font-style: italic;"><%= currency(userDetail.balance) %></div></h2>
+    <a href="/<%= userData.username %>/home/<%= itemData.id %>/checkout/yes"><button>Yes, Proceed</button></a>
+    <a href="/<%= userData.username %>/home/<%= itemData.id %>/checkout/no"><button>No, Cancel</button></a>
+</body>
+</html>

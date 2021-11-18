@@ -1,5 +1,7 @@
 const express = require('express')
 const {UserController, MainController}  = require('./controllers/controller')
+const BuyingController = require('./controllers/buyingController')
+
 const app = express()
 const port = 3000
 const session = require('express-session')
@@ -71,11 +73,10 @@ app.get('/:username/home', MainController.getUserHome) // GLENN
 app.post('/:username/home', MainController.postUserHome) // update topup // GLENN
 app.get('/:username/home/userdetail', MainController.getUserDetail)
 app.post('/:username/home/userdetail', MainController.postUserDetail)
-app.get('/:username/home/checkout') // IHZA
-app.post('/:username/home/checkout') //update balance // IHZA
+app.get('/:username/home/:ItemId/checkout', BuyingController.checkoutPage) // IHZA
+app.get('/:username/home/:ItemId/checkout/yes', BuyingController.processBuy) // IHZA
+app.get('/:username/home/:ItemId/checkout/no', BuyingController.rejectBuy) // IHZA
 
-
-// app.get('/:username/home', MainController.UserHomePage)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
