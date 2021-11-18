@@ -1,5 +1,5 @@
 const express = require('express')
-const UserController = require('./controllers/controller')
+const {UserController, MainController}  = require('./controllers/controller')
 const app = express()
 const port = 4000
 
@@ -14,6 +14,9 @@ app.get('/register', UserController.getRegister)
 app.post('/register', UserController.postRegister)
 app.get('/login/:username')
 app.post('/login/:username')
+
+app.get('/admin/home', MainController)
+app.get('/:username/home', MainController.UserHomePage)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
