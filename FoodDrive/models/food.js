@@ -15,11 +15,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Food.init({
-    name: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    category: DataTypes.STRING,
-    berat: DataTypes.INTEGER,
-    StoreId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      notEmpty: true,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      notEmpty: true,
+      allowNull: false
+    },
+    category: {
+      type: DataTypes.STRING,
+      notEmpty: true,
+      allowNull: false
+    },
+    berat: {
+      type: DataTypes.INTEGER,
+      notEmpty: true,
+      allowNull: false
+    },
+    StoreId: {
+      type: DataTypes.INTEGER,
+      notEmpty: true,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Food',

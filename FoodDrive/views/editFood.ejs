@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%= JSON.stringify(data1) %>
+    <%= JSON.stringify(data2) %>
+    <form action="/admin/home/edit/food/<%= data1.id %>" method="POST">
+        <label>Name</label><br>
+        <input type="text" name="name" value="<%= data1.name %>"><br>
+        <label>Price</label><br>
+        <input type="text" name="price" value="<%= data1.price %>"><br>
+        <label>Category</label><br>
+        <input type="text" name="category" value="<%= data1.category %>"><br>
+        <label>Berat</label><br>
+        <input type="text" name="berat" value="<%= data1.berat %>"><br>
+
+        <p>Store</p>
+        <% data2.forEach(e=>{ %>
+        <input type="radio" name="StoreId" value="<%= e.id %>"><label><%= e.name %></label><br>
+        <% }) %>
+
+        <input type="submit" value="Submit">
+      </form> 
+
+</body>
+</html>
