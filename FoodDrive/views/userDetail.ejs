@@ -1,26 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    .center {
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    div {text-align: center;}
+    label {text-align:left;
+        padding: 14px 0px;}
+
+    th.table {
+    width: 150px;
+    }
+
+    .block {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #04AA6D;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    }
+
+    label {
+    width:110px;
+    display: inline-block;
+    }
+    
+    
+
+  </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<body>
-    <%= JSON.stringify(data) %>
+<body style="background-color:#cee9c0;">
 
-    <form action="/<%= data.username %>/home/userdetail" method="POST">
-        <label>First Name: </label><br>
-        <input type="text" name="firstName" value="<%= data.UserDetail.firstName %>"><br>
-        <label>Last Name:</label><br>
-        <input type="text" name="lastName" value="<%= data.UserDetail.lastName %>"><br>
-        <label>Birth Date:</label><br>
-        <input type="date" name="birthDate" value="<%= data.UserDetail.birthDate %>"><br>
-        <label>Gender:</label><br>
-        <input type="text" name="gender" value="<%= data.UserDetail.gender %>"><br>
-        <label>Address:</label><br>
-        <input type="text" name="address" value="<%= data.UserDetail.address %>"><br>
-        <input type="submit" value="Submit">
-      </form> 
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+          <a href="/<%= data.username %>/home" class="w3-bar-item w3-button">Welcome <%= data.UserDetail.firstName %> | Balance : <%= currency(data.UserDetail.balance) %> | </a>
+
+          <a class="w3-bar-item w3-button">
+            <form action="/home" method="POST">
+              <input type="text" name="addBalance">
+              <input type="submit" value="Top-Up">
+            </form> 
+        </a>
+          
+          <div class="w3-right w3-hide-small">
+            <a href="/<%= data.username %>/home/userdetail" class="w3-bar-item w3-button">Username Detail</a>
+            <a href="/login" class="w3-bar-item w3-button">Log-Out</a>
+
+    
+    
+          </div>
+        </div>
+      </div> <br><br><br><br>
+
+          
+      <div class="center">
+          <form action="/<%= data.username %>/home/userdetail" method="POST">
+              <label>First Name: </label>
+              <input type="text" name="firstName" value="<%= data.UserDetail.firstName %>"><br>
+              <label>Last Name:</label>
+              <input type="text" name="lastName" value="<%= data.UserDetail.lastName %>"><br>
+              <label>Birth Date:</label>
+              <input type="date" name="birthDate" value="<%= data.UserDetail.birthDate %>"><br>
+              <label>Gender:</label>
+              <input type="text" name="gender" value="<%= data.UserDetail.gender %>"><br>
+              <label>Address:</label>
+              <input type="text" name="address" value="<%= data.UserDetail.address %>"><br><br>
+              <input type="submit" value="Submit" style="height:30px; width:320px">
+            </form> 
+
+      </div>
+
 </body>
 </html>

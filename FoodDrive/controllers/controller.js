@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const currency = require('../helper/convertToCurrency')
 const { Food, Store, UserDetail, User } = require('../models')
+const { Op } = require("sequelize");
 
 class UserController {
     static getHome(req, res) {
@@ -196,15 +197,31 @@ class MainController {
             })
             .then(data => {
                 Store.findAll({
-                    include: Food,
-                    where: {name: `${filter}`}
+                    include: Food
+                    ,
+                    where: {
+                        name: {
+                            [Op.or]: [
+                                {[Op.like]: `%${filter.toUpperCase()}%`},
+                                {[Op.like]: `%${filter.toLowerCase()}%`},
+                                {[Op.like]: `%${filter}%`}
+                            ]
+                        }
+                    }
                 })
                     .then(dataFood => {
                         return res.render('userHome', { data, dataFood , currency })
                     })
-                    .catch(err => res.send(err))
-            })
-            .catch(err => res.send(err))
+                    .catch(err => {
+                        res.send(err)
+                    })
+                })
+                .catch(err => {
+                    console.log("SAAS")
+                    console.log("SAAS")
+                    console.log("SAAS")
+                    console.log(err)
+                })
         }
     }
 
@@ -235,7 +252,7 @@ class MainController {
             include: UserDetail,
             where: {username : req.params.username}
         })
-        .then(data => res.render('userDetail', { data }))
+        .then(data => res.render('userDetail', { currency, data }))
         .catch(err => res.send(err))
     }
     
@@ -258,19 +275,8 @@ class MainController {
             })
             .then(data => res.redirect(`/${req.params.username}/home/userdetail`))
             .catch(err => res.send(err))
-
-
-
-
-
         })
         .catch(err => res.send(err))
-
-
-
-
-
-
     }
 
 }

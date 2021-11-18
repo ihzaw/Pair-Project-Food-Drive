@@ -36,22 +36,29 @@
 
   <div class="w3-top">
     <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
-      <a href="#home" class="w3-bar-item w3-button">Welcome <%= data.UserDetail.firstName %> | Balance : <%= currency(data.UserDetail.balance) %>
+      <a href="/<%= data.username %>/home" class="w3-bar-item w3-button">Welcome <%= data.UserDetail.firstName %> | Balance : <%= currency(data.UserDetail.balance) %> |  </a>
+      
+      <a class="w3-bar-item w3-button">
         <form action="/<%= data.username %>/home" method="POST">
           <input type="text" name="addBalance">
           <input type="submit" value="Top-Up">
         </form> 
       </a>
 
-      
-      <!-- Right-sided navbar links. Hide them on small screens -->
-      <div class="w3-right w3-hide-small">
-        <a href="/<%= data.username %>/home/userdetail" class="w3-bar-item w3-button">Username Detail</a>
-
+      <a class="w3-bar-item w3-button">
         <form action="/<%= data.username %>/home" method="GET">
           <input type="text" name="filter">
           <input type="submit" value="Filter">
         </form>
+      </a>
+
+      
+      <!-- Right-sided navbar links. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <a href="/<%= data.username %>/home/userdetail" class="w3-bar-item w3-button">Username Detail</a>
+        <a href="/login" class="w3-bar-item w3-button">Log-Out</a>
+
+
 
 
       </div>
@@ -87,10 +94,5 @@
           <% }) %>
   </div>
 
-
-
-
-
-<%= JSON.stringify(dataFood) %>
 </body>
 </html>

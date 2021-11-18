@@ -66,6 +66,16 @@ app.get('/:username/home/:ItemId/checkout', BuyingController.checkoutPage) // IH
 app.get('/:username/home/:ItemId/checkout/yes', BuyingController.processBuy) // IHZA
 app.get('/:username/home/:ItemId/checkout/no', BuyingController.rejectBuy) // IHZA
 
+/*
+
+NOTES:
+1. Seluruh validasi belum cantik
+2. Ada error di checkout(buy)
+3. Filter sudah OKE (less urgent)
+4. tampilan yang belum (checkout, admin semua) (less urgent)
+5. kalo bisa tambahin filter kategory (less urgent)
+*/
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
