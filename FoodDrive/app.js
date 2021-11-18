@@ -15,8 +15,14 @@ app.post('/register', UserController.postRegister)
 app.get('/login/:username')
 app.post('/login/:username')
 
-app.get('/admin/home', MainController)
-app.get('/:username/home', MainController.UserHomePage)
+app.get('/admin/home', MainController.bridge)
+app.get('/admin/home/storesList', MainController.fetchRestaurantData)
+app.get('/admin/home/addRestaurant', MainController.newRestaurantForm)
+app.post('/admin/home/addRestaurant', MainController.saveNewRestaurant)
+app.get('/admin/home/storesList/:StoreId', MainController.fetchSelectedRestaurant)
+app.get('/admin/home/storesList/:StoreId/delete', MainController.deleteRestaurant)
+app.get('/admin/home/addNewMenu', MainController)
+app.get('/:username/home', MainController)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
