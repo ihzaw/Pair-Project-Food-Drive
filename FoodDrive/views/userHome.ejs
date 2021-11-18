@@ -49,12 +49,7 @@
         <a href="/<%= data.username %>/home/userdetail" class="w3-bar-item w3-button">Username Detail</a>
 
         <form action="/<%= data.username %>/home" method="GET">
-          <select name="filter">
-            <%= JSON.stringify(dataFood) %>
-            <% dataFood.forEach(e=>{ %>
-            <option value="<%= e.id %>"><%= e.name %></option>
-            <% }) %>
-          </select>
+          <input type="text" name="filter">
           <input type="submit" value="Filter">
         </form>
 

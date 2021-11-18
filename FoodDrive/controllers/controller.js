@@ -196,7 +196,8 @@ class MainController {
             })
             .then(data => {
                 Store.findAll({
-                    include: Food
+                    include: Food,
+                    where: {name: `${filter}`}
                 })
                     .then(dataFood => {
                         return res.render('userHome', { data, dataFood , currency })
