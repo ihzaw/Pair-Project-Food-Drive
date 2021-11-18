@@ -24,7 +24,7 @@ class UserController {
 
 
                         
-                        req.session.userId = data.id
+                        req.session.UserId = data.id
 
 
 
