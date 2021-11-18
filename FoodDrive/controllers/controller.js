@@ -7,6 +7,7 @@ class UserController {
     }
 
     static getLogin(req, res) {
+        const error = req.query.error
         res.render('login')
     }
 
@@ -20,12 +21,8 @@ class UserController {
                 if (data !== null) {
                     let passValid = bcrypt.compareSync(req.body.password, data.password)
                     if (passValid) {
-
-
-                        
-                        req.session.UserId = data.id
-
-
+  
+                        req.session.UserId = data.id // BCRYPT
 
                         return res.redirect(`/${data.username}/home`)
                     }

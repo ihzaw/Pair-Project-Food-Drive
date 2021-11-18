@@ -47,7 +47,8 @@ app.post('/login/:username')
 app.use(function(req,res,next){ // BCRYPT
   console.log(req.session)
   if(!req.session.UserId){
-    res.redirect('/login?error')
+    const error = 'Please login First'
+    res.redirect(`/login?error=${error}`)
   } else {
     next()
   }
