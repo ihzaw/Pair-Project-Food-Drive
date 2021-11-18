@@ -21,9 +21,11 @@ class UserController {
                     let passValid = bcrypt.compareSync(req.body.password, data.password)
                     if (passValid) {
                         console.log("masok")
-                    }else {
-                        const error = 'invalid username/password'
-                        return res.redirect(`/login?error=${error}`)
+                        if(req.body.username ==- "admin") {
+                            res.redirect("/admin/home")
+                        } else {
+                            res.redirect(`/${req.body.username}/home`)
+                        }
                     }
                 } else {
                     const error = 'invalid username/password'
@@ -53,4 +55,7 @@ class UserController {
     }
 }
 
-module.exports = UserController
+class MainController {
+
+}
+module.exports = {UserController, MainController}
