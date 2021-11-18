@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <table>
+    <td><a href="/admin/home/add/restaurant">Add Restaurant</a></td>
+    <td><a href="/admin/home/add/food">Add Food</a></td>
+  </table>
+
+    <% data.forEach(e=>{ %>
+    <table border="1">
+        <tr>
+            <th colspan="2"><a href="/admin/home/edit/restaurant/<%= e.id %>"><%= e.id %>. <%= e.name %> - <%= e.address %></a></th>
+
+
+          <tr>
+            <th>Food Name</th>
+            <th>Price</th>
+          </tr>
+
+          <% e.Food.forEach(food=>{ %>
+          <tr>
+            <td><a href="/admin/home/edit/food/<%= food.id %>"><%= food.name %></a></td>
+            <td><a href="/admin/home/edit/food/<%= food.id %>"><%= food.price %></a></td>
+          </tr>
+          <% }) %>
+          <br><br>
+      </table>
+      <% }) %>
+
+
+</body>
+</html>
