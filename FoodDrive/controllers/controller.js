@@ -8,7 +8,7 @@ class UserController {
 
     static getLogin(req, res) {
         const error = req.query.error
-        res.render('login')
+        res.render('login', { error })
     }
 
     static postLogin(req, res) {

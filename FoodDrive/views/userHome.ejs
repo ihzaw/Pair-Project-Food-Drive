@@ -8,7 +8,6 @@
 </head>
 <body>
     <button onclick="window.location.href='/<%= data.username %>/home/userdetail'">Username Detail</button>
-    <%= JSON.stringify(dataFood) %>
     <p>Welcome <%= data.UserDetail.firstName %></p>
     <p>Balance : <%= data.UserDetail.balance %></p>
     <form action="/<%= data.username %>/home" method="POST">

@@ -3,7 +3,7 @@ const {UserController, MainController}  = require('./controllers/controller')
 const BuyingController = require('./controllers/buyingController')
 
 const app = express()
-const port = 3000
+const port = 4000
 const session = require('express-session')
 
 app.set('view engine', 'ejs')
@@ -33,6 +33,7 @@ app.get('/login/:username')
 app.post('/login/:username')
 
 
+
 // app.use(function(req,res,next){
 //   console.log(req.session)
 //   next()
@@ -45,6 +46,8 @@ app.post('/login/:username')
 //   console.log("MAOSKOKSOKSOK")
 //   next()
 // })
+
+
 
 app.use(function(req,res,next){ // BCRYPT
   console.log(req.session)
