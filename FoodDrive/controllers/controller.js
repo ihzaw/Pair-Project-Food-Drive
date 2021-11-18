@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-const { User, UserDetail, Store, Food  } = require('../models')
-=======
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
 const { Food, Store } = require('../models')
->>>>>>> 7656f4448e7cb4eef29174dea3d7c8105d05f1fa
 
 class UserController {
     static getHome(req, res) {
@@ -33,6 +29,9 @@ class UserController {
                         } else {
                             res.redirect(`/${req.body.username}/home`)
                         }
+                    } else {
+                        const error = 'invalid username/password'
+                        return res.redirect(`/login?error=${error}`)
                     }
                 } else {
                     const error = 'invalid username/password'
@@ -53,7 +52,8 @@ class UserController {
             User.create({
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password[0]
+                password: req.body.password[0],
+                role:'User'
             })
                 .then(data => { res.render('login') })
                 .catch(err => res.send(err.errors[0].message))
@@ -64,66 +64,6 @@ class UserController {
 }
 
 class MainController {
-<<<<<<< HEAD
-    // static bridge(req, res) {
-    //     let adminId = 2 //idnya admin itu 1
-    //     User.findByPk(adminId)
-    //         .then(data => {
-    //             console.log(data)
-    //             res.render('bridge', { data })
-    //         })
-    //         .catch(err => {
-    //             res.send(err)
-    //         })
-    // }
-
-    // static fetchRestaurantData(req, res) {
-    //     Store.findAll()
-    //     .then(data => {
-    //         console.log(data)
-    //         res.render('restaurantList', {data})
-    //     })
-    //     .catch(err => {
-    //         res.send(err)
-    //     })
-    // }
-
-    // static newRestaurantForm(req, res) {
-    //     res.render('addRestaurant')
-    // }
-
-    // static saveNewRestaurant(req, res) {
-    //     let {name, address} = req.body
-    //     Store.create({name, address})
-    //     .then(data => {
-    //         res.redirect('/admin/home/storesList')
-    //     })
-    // }
-
-    // static deleteRestaurant(req, res) {
-    //     console.log(req.params)
-    //     let id = req.params.StoreId
-    //     Store.destroy({
-    //         where:{
-    //             id: id
-    //         }
-    //     })
-    //     .then(data => {
-    //         res.redirect('/admin/home/storesList')
-    //     })
-    //     .catch(err => {
-    //         res.send(err)
-    //     })
-    // }
-    
-    // static fetchSelectedRestaurant(req, res) {
-    //     let id = req.params.StoreId
-    //     Store.findByPk(id)
-    //     .then (data => {
-    //         res.render('storeDetails', {data})
-    //     })
-    // }
-=======
     static getAdminHomePage(req, res) {
         Store.findAll({
             include: Food
@@ -218,14 +158,6 @@ class MainController {
         .then(data =>{res.redirect('/admin/home')})
         .catch(err =>{res.send(err)})
     }
-
->>>>>>> 7656f4448e7cb4eef29174dea3d7c8105d05f1fa
-
-    // static toCreateMenu(req, res) {
-    //     Store.findAll()
-    //     .then(data => {
-    //         res.render('addItem', {data})
-    //     })
-    // }
 }
+
 module.exports = { UserController, MainController }

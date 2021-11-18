@@ -1,5 +1,7 @@
 const express = require('express')
 const {UserController, MainController}  = require('./controllers/controller')
+const BuyingController = require('./controllers/buyingController')
+
 const app = express()
 const port = 3000
 
@@ -15,16 +17,6 @@ app.post('/register', UserController.postRegister)
 app.get('/login/:username')
 app.post('/login/:username')
 
-<<<<<<< HEAD
-app.get('/admin/home', MainController.bridge)
-app.get('/admin/home/storesList', MainController.fetchRestaurantData)
-app.get('/admin/home/addRestaurant', MainController.newRestaurantForm)
-app.post('/admin/home/addRestaurant', MainController.saveNewRestaurant)
-app.get('/admin/home/storesList/:StoreId', MainController.fetchSelectedRestaurant)
-app.get('/admin/home/storesList/:StoreId/delete', MainController.deleteRestaurant)
-app.get('/admin/home/addNewMenu', MainController)
-app.get('/:username/home', MainController)
-=======
 
 app.get('/admin/home', MainController.getAdminHomePage)
 app.get('/admin/home/edit/restaurant/:restaurantId', MainController.getEditRestaurant)
@@ -43,12 +35,13 @@ app.get('/:username/home') // GLENN
 app.post('/:username/home') // update topup // GLENN
 app.get('/:username/home/userdetail')
 app.post('/:username/home/userdetail')
-app.get('/:username/home/checkout') // IHZA
+app.get('/:username/home/:ItemId/checkout', BuyingController.checkoutPage) // IHZA
+app.get('/:username/home/:ItemId/checkout/yes', BuyingController.processBuy) // IHZA
+app.get('/:username/home/:ItemId/checkout/no', BuyingController.rejectBuy) // IHZA
 app.post('/:username/home/checkout') //update balance // IHZA
 
 
 // app.get('/:username/home', MainController.UserHomePage)
->>>>>>> 7656f4448e7cb4eef29174dea3d7c8105d05f1fa
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
