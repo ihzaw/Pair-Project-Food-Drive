@@ -15,7 +15,7 @@ class UserController {
 
     static postLogin(req, res) {
         console.log(req.body.username)
-        User.findOne({
+        User.findOne( {
             where: {
                 username: req.body.username
             }
