@@ -1,46 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    .center {
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+
+    th.table {
+    width: 150px;
+    }
+
+    .block {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #04AA6D;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    }
+    
+    
+
+  </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<body>
-    <button onclick="window.location.href='/<%= data.username %>/home/userdetail'">Username Detail</button>
-    <%= JSON.stringify(dataFood) %>
-    <p>Welcome <%= data.UserDetail.firstName %></p>
-    <p>Balance : <%= data.UserDetail.balance %></p>
-    <form action="/<%= data.username %>/home" method="POST">
-        <label for="fname">Top-Up</label><br>
-        <input type="text" name="addBalance"><br>
-        <input type="submit" value="Submit">
-      </form> 
+<body style="background-color:#cee9c0;">
+
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+      <a href="/<%= data.username %>/home" class="w3-bar-item w3-button">Welcome <%= data.UserDetail.firstName %> | Balance : <%= currency(data.UserDetail.balance) %> |  </a>
+      
+      <a class="w3-bar-item w3-button">
+        <form action="/<%= data.username %>/home" method="POST">
+          <input type="text" name="addBalance">
+          <input type="submit" value="Top-Up">
+        </form> 
+      </a>
+
+      <a class="w3-bar-item w3-button">
+        <form action="/<%= data.username %>/home" method="GET">
+          <input type="text" name="filter">
+          <input type="submit" value="Filter">
+        </form>
+      </a>
+
+      
+      <!-- Right-sided navbar links. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <a href="/<%= data.username %>/home/userdetail" class="w3-bar-item w3-button">Username Detail</a>
+        <a href="/login" class="w3-bar-item w3-button">Log-Out</a>
+
+
+
+
+      </div>
+    </div>
+  </div> <br><br><br>
+
+
+
+  <div class="center">
+
 
       <% dataFood.forEach(e=>{ %>
-        <table border="1">
+        <table border="1" class="center">
             <tr>
                 <th colspan="3"><%= e.id %>. <%= e.name %> - <%= e.address %></th>
               <tr>
-                <th>Food Name</th>
-                <th>Price</th>
-                <th>Buy Now</th>
+                <th class="table">Food Name</th>
+                <th class="table">Price</th>
+                <th class="table">Buy Now</th>
               </tr>
               <% e.Food.forEach(food=>{ %>
-              <tr>
-                <td><%= food.name %></td>
-                <td><%= food.price %></td>
-                <td><a href="/<%= data.username %>/home/<%= e.id %>/checkout">BUY</a></td>
-              </tr>
+
+                  <tr>
+                    <td><%= food.name %></td>
+                    <td><%= currency(food.price) %></td>
+                    <td><button class="block" onclick="window.location.href='/<%= data.username %>/home/<%= food.id %>/checkout'">BUY</button></td>
+                  </tr>
+
+              
               <% }) %>
               <br><br>
           </table>
           <% }) %>
-
-
-
-
-
+  </div>
 
 </body>
 </html>
