@@ -24,26 +24,12 @@ class UserController {
                 if (data !== null) {
                     let passValid = bcrypt.compareSync(req.body.password, data.password)
                     if (passValid) {
-<<<<<<< HEAD
-                        
-
-                        
-                        req.session.UserId = data.id
-
-
-                        if(data.UserDetail === null) {
-                            res.redirect(`/${req.body.username}/home/userdetail`)
-                        } else {
-                            res.redirect(`/${data.username}/home`)
-                        }
-=======
   
                         req.session.UserId = data.id // BCRYPT
 
                         if(data.role === 'Admin') return res.redirect(`/admin/home`)
 
                         return res.redirect(`/${data.username}/home`)
->>>>>>> 77fccee9f0ebdeafb379255928f6015e1dab6578
                     }
                     else {
                         const error = 'invalid username/password'
